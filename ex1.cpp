@@ -1,12 +1,13 @@
 #include "mbed.h"
 
-
+AnalogIn Ain(D7);
 PwmOut PWM1(D6);
-
-//int sample = 128;
+Serial pc( USBTX, USBRX );
+AnalogOut Aout(DAC0_OUT);
+int sample = 128;
 int i;
 
-//float ADCdata[128];
+float ADCdata[128];
 int main(){
     PWM1.period(1/1000);
     for( i=0; i<1; i+=0.1 ){
