@@ -7,7 +7,6 @@ PwmOut PWM1(D6);
 int i;
 
 //float ADCdata[128];
-
 int main(){
     PWM1.period(1/1000);
     for( i=0; i<1; i+=0.1 ){
