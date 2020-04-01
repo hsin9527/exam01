@@ -9,6 +9,7 @@ int i;
 
 float ADCdata[128];
 int main(){
+    whili(1){
     PWM1.period(1/1000);
     for( i=0; i<1; i+=0.1 ){
         PWM1 = i;
@@ -28,4 +29,5 @@ int main(){
     pc.printf("%1.3f\r\n", ADCdata[i]);
     wait(0.1);
   }
+    }
 }
