@@ -1,33 +1,34 @@
 #include "mbed.h"
 
-AnalogIn Ain(D7);
-PwmOut PWM1(D6);
-Serial pc( USBTX, USBRX );
-AnalogOut Aout(DAC0_OUT);
-int sample = 128;
-int i;
 
-float ADCdata[128];
-int main(){
-    whili(1){
-    PWM1.period(1/1000);
-    for( i=0; i<1; i+=0.1 ){
-        PWM1 = i;
-        wait(0.01);
-    }
-    for(i=1; i>0; i-=0.1){
-        PWM1 = i;
-        wait(0.1);
-    }
-  for (i = 0; i < sample; i++){
-    Aout = Ain;
-    ADCdata[i] = Ain;
-    wait(1./sample);
+PwmOut PWM1(D6);
+
+
+int main() {
+
+    float duty = 0;
+    float ADCdata[128];
+    int i = 0;
+    PWM1.period(0.1);
+    while(1){
+        while(duty<1){
+            PWM1 = duty;
+            duty += 0.1;
+            if(i<128){
+                ADCdata[i] = duty;
+                pc.printf("%1.3f\r\n", ADCdata[i]);
+                i++;
+            }
+        }
+        while(duty>0){
+            PWM1 = duty;
+            duty -= 0.1;
+            if(i<128){
+                ADCdata[i] = duty;
+                pc.printf("%1.3f\r\n", ADCdata[i]);
+                i++;
+            }
+        }
     
-  }
-  for (i = 0; i < sample; i++){
-    pc.printf("%1.3f\r\n", ADCdata[i]);
-    wait(0.1);
-  }
     }
-}
+    // f
